@@ -2,8 +2,9 @@ import { Request, Response } from "express";
 import prisma from "../prisma";
 import bcrypt from "bcrypt";
 import HttpException from "../utils/HttpException";
+import asyncHandler from "../utils/asyncHandler";
 
-const create = async (req: Request, res: Response) => {
+const create = asyncHandler(async (req: Request, res: Response) => {
   const reqBody = req.body;
   const email = reqBody.email.toLowerCase();
 
@@ -27,9 +28,9 @@ const create = async (req: Request, res: Response) => {
     message: "User created Successfully",
     data: user,
   });
-};
+});
 
-const get = async (req: Request, res: Response) => {
+const get = asyncHandler(async (req: Request, res: Response) => {
   const user = await prisma.user.findMany({
     select: {
       id: true,
@@ -44,8 +45,49 @@ const get = async (req: Request, res: Response) => {
     message: "User are listed below",
     data: user,
   });
-};
+});
 
-const UserController = { create, get };
+const update = asyncHandler(async (req: Request, res: Response) => {
+  const { name } = req.body;
+  const userID = req.params.userID;
+
+  const updatedUser = await prisma.user.update({
+    where: { id: userID },
+    data: { name },
+  });
+  return res.status(201).json({
+    message: "User updated sucessfully",
+  });
+});
+
+const getUserById = asyncHandler(async (req: Request, res: Response) => {
+  const userID = req.params.userID;
+  const singleUser = await prisma.user.findFirst({
+    where: { id: userID },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
+  return res.status(200).json({
+    message: "User by id get sucessfully",
+    data: singleUser,
+  });
+});
+
+const deleteUser = asyncHandler(async (req: Request, res: Response) => {
+  const userID = req.params.userID;
+  const singleUser = await prisma.user.delete({
+    where: { id: userID },
+  });
+  return res.status(204).json({
+    message: "User deleted sucessfully",
+  });
+});
+
+const UserController = { create, get, update, getUserById, deleteUser };
 
 export default UserController;

@@ -11,5 +11,12 @@ export const UserCreateSchema = z.object({
     })
     .strict(),
 });
+export const UserUpdateSchema = z.object({
+  body: z
+    .object({
+      name: z.string({ required_error: "Name is required" }),
+    })
+    .strict(),
+});
 
 export type UserCreateInputType = z.infer<typeof UserCreateSchema>["body"];
