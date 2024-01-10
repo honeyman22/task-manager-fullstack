@@ -3,10 +3,9 @@ export const TaskCreateSchema = z.object({
   body: z
     .object({
       title: z.string({ required_error: "Name is required" }),
-      startDate: z.date().optional(),
-      endDate: z.date().optional(),
+      startDate: z.string().optional(),
+      endDate: z.string().optional(),
       description: z.string({ required_error: "Description is required" }),
-      userId: z.string().optional(),
     })
     .strict(),
 });

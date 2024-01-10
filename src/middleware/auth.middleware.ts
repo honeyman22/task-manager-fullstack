@@ -31,7 +31,6 @@ export const authMiddleware = async (
 
         if (!user)
           throw new HttpException("Access denied (Invalid token)", 401);
-
         res.locals.user = user;
 
         return next();
