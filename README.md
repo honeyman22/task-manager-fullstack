@@ -29,7 +29,23 @@ This repository contains the backend code for a Task Manager application. The Ta
 
 2. **Install Dependencies:**
 
-```javascript
-cd task-manager-backend
-npm install
-```
+  ```javascript
+   cd task-manager-backend
+   npm install
+  ```
+3. **Start the Server:**
+  ``` bash npm start```
+   
+
+ ## API Endpoints
+   - POST /api/auth/register : Register a new user.
+   - POST /api/auth/login : Authenticate and login a user.
+   - GET /api/tasks : Get a list of tasks.
+   - GET /api/ : Get profile of a authenticated user.
+   - POST /api/tasks : Create a new task.
+   - PUT /api/tasks/:taskId : Update an existing task.
+   - DELETE /api/tasks/:taskId : Delete a task.
+   - DELETE /api/users/:userID : Delete a user.
+   - PUT /api/users/:taskId : Update an existing user.
+   - GET /api/users : Update an existing task.
+
