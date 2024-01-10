@@ -3,6 +3,8 @@ import prisma from "../prisma";
 import bcrypt from "bcrypt";
 import HttpException from "../utils/HttpException";
 import asyncHandler from "../utils/asyncHandler";
+import jwt from "jsonwebtoken";
+import { JWT_SECURED_KEY } from "../env";
 
 const create = asyncHandler(async (req: Request, res: Response) => {
   const reqBody = req.body;
@@ -21,6 +23,22 @@ const create = asyncHandler(async (req: Request, res: Response) => {
       ...reqBody,
       email,
       password,
+    },
+  });
+
+  const jwttoken = jwt.sign(
+    { _id: user?.id, email: user?.email },
+    JWT_SECURED_KEY,
+    {
+      expiresIn: "2h",
+    }
+  );
+
+  const updateduser = await prisma.user.update({
+    where: { id: user?.id },
+    data: {
+      ...user,
+      token: jwttoken,
     },
   });
 

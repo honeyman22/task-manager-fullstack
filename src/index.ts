@@ -3,13 +3,14 @@ import prisma from "./prisma";
 import UserRoutes from "./routes/user.router";
 import TaskRoutes from "./routes/task.router";
 import errorMiddleware from "./middleware/error.middleware";
+import authRouter from "./routes/auth.router";
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(UserRoutes, TaskRoutes);
+app.use(UserRoutes, TaskRoutes, authRouter);
 
 app.use(errorMiddleware);
 

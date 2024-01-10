@@ -6,7 +6,7 @@ export const TaskCreateSchema = z.object({
       startDate: z.date().optional(),
       endDate: z.date().optional(),
       description: z.string({ required_error: "Description is required" }),
-      userId: z.string({ required_error: "User is required" }),
+      userId: z.string().optional(),
     })
     .strict(),
 });
@@ -20,7 +20,7 @@ export const TaskUpdateSchema = z.object({
       description: z
         .string({ required_error: "Description is required" })
         .optional(),
-      userId: z.string({ required_error: "User is required" }).optional(),
+      userId: z.string().optional(),
     })
     .strict(),
 });
