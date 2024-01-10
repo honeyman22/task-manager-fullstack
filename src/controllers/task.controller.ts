@@ -29,9 +29,7 @@ const create = asyncHandler(async (req: Request, res: Response) => {
 const getTasks = asyncHandler(async (req: Request, res: Response) => {
   const tasks = await prisma.task.findMany({
     where: { userId: res.locals.user.id },
-    orderBy: {
-      createdAt: "desc",
-    },
+     
   });
   return res.status(200).json({
     status: true,
@@ -42,7 +40,17 @@ const getTasks = asyncHandler(async (req: Request, res: Response) => {
 
 const updateTask = asyncHandler(async (req: Request, res: Response) => {
   const reqBody = req.body;
+  const { startDate, endDate } = reqBody;
   const taskid = req.params.id;
+
+  console.log(startDate);
+
+  let date: any;
+  // let;
+  if (startDate) {
+    date = new Date(startDate);
+
+  }
 
   const checkTask = await prisma.task.findUnique({ where: { id: taskid } });
 
@@ -51,7 +59,8 @@ const updateTask = asyncHandler(async (req: Request, res: Response) => {
   const updatedtask = await prisma.task.update({
     where: { id: taskid },
     data: {
-      ...reqBody,
+      title: reqBody.title,
+      startDate: date,
     },
   });
   return res.status(201).json({

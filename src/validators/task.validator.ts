@@ -15,8 +15,9 @@ export const TaskUpdateSchema = z.object({
   body: z
     .object({
       title: z.string({ required_error: "Name is required" }).optional(),
-      startDate: z.date().optional(),
-      endDate: z.date().optional(),
+      startDate: z.string().optional(),
+      endDate: z.string().optional(),
+      status: z.string().optional(),
       description: z
         .string({ required_error: "Description is required" })
         .optional(),

@@ -78,6 +78,7 @@ const update = asyncHandler(async (req: Request, res: Response) => {
 });
 
 const getProfile = asyncHandler(async (req: Request, res: Response) => {
+  
   const singleUser = await prisma.user.findFirst({
     where: { id: res.locals.user.id },
     select: {
