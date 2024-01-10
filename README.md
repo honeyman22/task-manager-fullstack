@@ -17,9 +17,9 @@ This repository contains the backend code for a Task Manager application. The Ta
 - **Node.js:** Server-side JavaScript runtime.
 - **Express.js:** Web application framework for Node.js.
 - **Prisma:** Database toolkit for interfacing with the database.
-- **[Database System]:** [e.g., PostgreSQL, MySQL] for data storage.
-- **[Authentication Library]:** [e.g., Passport.js] for user authentication.
-- **[Other Libraries/Tools]:** [List any other key libraries or tools used in your project]
+- **[Database System]:**  PostgreSQL for data storage.
+- **[Authentication Library]:** jsonwebtoken for user authentication.
+- **[Other Libraries/Tools]:**  zod , bcrypt,dotenv etc...
 
 ## Setup
 
@@ -27,3 +27,9 @@ This repository contains the backend code for a Task Manager application. The Ta
    ```bash
    git clone [repository_url]
 
+2. **Install Dependencies:**
+
+bash
+Copy code
+cd task-manager-backend
+npm install
