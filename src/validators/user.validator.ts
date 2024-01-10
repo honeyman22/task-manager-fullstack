@@ -14,7 +14,7 @@ export const UserCreateSchema = z.object({
 export const UserUpdateSchema = z.object({
   body: z
     .object({
-      name: z.string({ required_error: "Name is required" }),
+      name: z.string().min(5).optional(),
     })
     .strict(),
 });

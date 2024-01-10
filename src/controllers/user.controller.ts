@@ -26,7 +26,6 @@ const create = asyncHandler(async (req: Request, res: Response) => {
 
   return res.status(201).json({
     message: "User created Successfully",
-    data: user,
   });
 });
 

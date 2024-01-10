@@ -1,13 +1,17 @@
 import express from "express";
 import prisma from "./prisma";
 import UserRoutes from "./routes/user.router";
+import TaskRoutes from "./routes/task.router";
+import errorMiddleware from "./middleware/error.middleware";
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(UserRoutes);
+app.use(UserRoutes, TaskRoutes);
+
+app.use(errorMiddleware);
 
 prisma
   .$connect()
