@@ -10,21 +10,21 @@ import { authMiddleware } from "../middleware/auth.middleware";
 const router = Router();
 
 router.post(
-  "/tasks",
+  "/api/tasks",
   authMiddleware,
   validate(TaskCreateSchema),
   taskController.create
 );
-router.get("/tasks", authMiddleware, taskController.getTasks);
+router.get("/api/tasks", authMiddleware, taskController.getTasks);
 router.put(
-  "/tasks/:id",
+  "/api/tasks/:id",
   authMiddleware,
   validate(TaskUpdateSchema),
   taskController.updateTask
 );
 
 router.delete(
-  "/tasks/:id",
+  "api/tasks/:id",
   authMiddleware,
   validate(TaskUpdateSchema),
   taskController.deleteTask

@@ -9,11 +9,15 @@ import { authMiddleware } from "../middleware/auth.middleware";
 
 const router = Router();
 
-router.post("/users", validate(UserCreateSchema), UserController.create);
+router.post(
+  "/api/auth/register",
+  validate(UserCreateSchema),
+  UserController.create
+);
 router.get("/users", UserController.get);
-router.put("/users/:userID", validate(UserUpdateSchema), UserController.update);
-router.get("/", authMiddleware, UserController.getProfile);
-router.delete("/users/:userID", UserController.deleteUser);
+// router.put("/users/:userID", validate(UserUpdateSchema), UserController.update);
+router.get("/api/", authMiddleware, UserController.getProfile);
+router.delete("/api/users/:userID", UserController.deleteUser);
 
 const UserRoutes = router;
 
