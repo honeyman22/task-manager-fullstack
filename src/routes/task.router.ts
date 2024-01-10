@@ -22,6 +22,13 @@ router.put(
   validate(TaskUpdateSchema),
   taskController.updateTask
 );
+
+router.delete(
+  "/tasks/:id",
+  authMiddleware,
+  validate(TaskUpdateSchema),
+  taskController.deleteTask
+);
 const TaskRoutes = router;
 
 export default TaskRoutes;

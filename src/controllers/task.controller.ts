@@ -61,6 +61,21 @@ const updateTask = asyncHandler(async (req: Request, res: Response) => {
   });
 });
 
-const taskController = { create, getTasks, updateTask };
+const deleteTask = asyncHandler(async (req: Request, res: Response) => {
+  const taskid = req.params.id;
+  const checkTask = await prisma.task.findUnique({ where: { id: taskid } });
+
+  if (!checkTask) throw new HttpException("Task doesnot exist", 404);
+
+  const deletetask = await prisma.task.delete({
+    where: { id: taskid },
+  });
+
+  return res.status(201).json({
+    message: "Task deleted successfully",
+  });
+});
+
+const taskController = { create, getTasks, updateTask, deleteTask };
 
 export default taskController;

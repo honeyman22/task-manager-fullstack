@@ -77,10 +77,9 @@ const update = asyncHandler(async (req: Request, res: Response) => {
   });
 });
 
-const getUserById = asyncHandler(async (req: Request, res: Response) => {
-  const userID = req.params.userID;
+const getProfile = asyncHandler(async (req: Request, res: Response) => {
   const singleUser = await prisma.user.findFirst({
-    where: { id: userID },
+    where: { id: res.locals.user.id },
     select: {
       id: true,
       name: true,
@@ -90,7 +89,7 @@ const getUserById = asyncHandler(async (req: Request, res: Response) => {
     },
   });
   return res.status(200).json({
-    message: "User by id get sucessfully",
+    message: "User profile get sucessfully",
     data: singleUser,
   });
 });
@@ -105,6 +104,6 @@ const deleteUser = asyncHandler(async (req: Request, res: Response) => {
   });
 });
 
-const UserController = { create, get, update, getUserById, deleteUser };
+const UserController = { create, get, update, getProfile, deleteUser };
 
 export default UserController;
