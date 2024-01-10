@@ -29,7 +29,7 @@ This repository contains the backend code for a Task Manager application. The Ta
 
 2. **Install Dependencies:**
 
-bash
-Copy code
+```javascript
 cd task-manager-backend
 npm install
+```
